@@ -1,3 +1,3 @@
 # Programming Language Concepts
 
-## occasional Team Member: [Zain Khan](https://github.com/zainakh)
+## Occasional Team Member: [Zain Khan](https://github.com/zainakh)
