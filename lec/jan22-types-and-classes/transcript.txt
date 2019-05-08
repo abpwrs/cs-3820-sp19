@@ -1,0 +1,87 @@
+antioch:~/plc/lec/jan22-types-and-classes$ ghci
+GHCi, version 8.4.3: http://www.haskell.org/ghc/  :? for help
+Prelude> :l Instruments
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+
+Instruments.hs:8:3: error:status
+    Not in scope: type constructor or class ‘Violin’
+  |
+8 |   Violin |
+  |   ^^^^^^
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> :t undefined
+undefined :: a
+*Instruments> getInstrumentType Violin
+
+<interactive>:4:1: error:
+    • No instance for (Show InstrumentType)
+        arising from a use of ‘print’
+    • In a stmt of an interactive GHCi command: print it
+*Instruments> 'a'
+'a'
+*Instruments> :r
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> showInstrument Violin
+"violin"
+*Instruments> getInstrumentType Violin
+
+<interactive>:8:1: error:
+    • No instance for (Show InstrumentType)
+        arising from a use of ‘print’
+    • In a stmt of an interactive GHCi command: print itu
+*Instruments> :r
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> Violin
+violin
+*Instruments> [Violin,Oboe,Trumpet]
+[violin,oboe,trumpet]
+*Instruments> show [Violin,Oboe,Trumpet]
+"[violin,oboe,trumpet]"
+*Instruments> :t show [Violin,Oboe,Trumpet]
+show [Violin,Oboe,Trumpet] :: String
+*Instruments> :r
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> :q
+Leaving GHCi.
+antioch:~/plc/lec/jan22-types-and-classes$ ghci
+GHCi, version 8.4.3: http://www.haskell.org/ghc/  :? for help
+Prelude> :l Instruments
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> getInstrumentType Violin
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Instruments.hs:52:21 in main:Instruments
+*Instruments> :r
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> getInstrumentType Viola
+strings
+*Instruments> :r
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> getInstrumentType Viola
+strings
+*Instruments> :r
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> getInstrumentType Viola
+strings
+*Instruments> :r
+[1 of 1] Compiling Instruments      ( Instruments.hs, interpreted )
+Ok, one module loaded.
+*Instruments> not
+
+<interactive>:10:1: error:
+    • No instance for (Show (Bool -> Bool))
+        arising from a use of ‘print’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command: print it
+*Instruments> 

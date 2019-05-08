@@ -1,0 +1,251 @@
+antioch:~/plc/lec/feb12-functors-applicatives$ evince ~/plc/hw2/hw2.pdf 
+antioch:~/plc/lec/feb12-functors-applicatives$ ghci
+GHCi, version 8.4.3: http://www.haskell.org/ghc/  :? for help
+Prelude> :k Maybe
+Maybe :: * -> *
+Prelude> Nothing 
+Nothing
+Prelude> :t Nothing
+Nothing :: Maybe a
+Prelude> :t Just "hi"
+Just "hi" :: Maybe [Char]
+Prelude> import Data.Hashmap
+
+<no location info>: error:
+    Could not find module ‘Data.Hashmap’
+    Perhaps you meant
+      Data.Hash (from data-hash-0.2.0.1)
+      Data.HashSet (from unordered-containers-0.2.9.0)
+Prelude> import Data.Hash
+Prelude Data.Hash> :k HashMap
+
+<interactive>:1:1: error:
+    Not in scope: type constructor or class ‘HashMap’
+Prelude Data.Hash> :k Hashmap
+
+<interactive>:1:1: error:
+    Not in scope: type constructor or class ‘Hashmap’
+Prelude Data.Hash> import Data.HashMap.Strict
+Prelude Data.Hash Data.HashMap.Strict> :k Hashmap
+
+<interactive>:1:1: error:
+    Not in scope: type constructor or class ‘Hashmap’
+    Perhaps you meant ‘HashMap’ (imported from Data.HashMap.Strict)
+Prelude Data.Hash Data.HashMap.Strict> :k HashMap
+HashMap :: * -> * -> *
+Prelude Data.Hash Data.HashMap.Strict> :q
+Leaving GHCi.
+antioch:~/plc/lec/feb12-functors-applicatives$ ghci
+GHCi, version 8.4.3: http://www.haskell.org/ghc/  :? for help
+Prelude> :l Inclass
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:5:11: error:
+    • Ambiguous type variable ‘k0’ arising from a use of ‘insert’
+      prevents the constraint ‘(Eq k0)’ from being solved.
+      Relevant bindings include
+        example :: HashMap k0 [Char] (bound at Inclass.hs:5:1)
+      Probable fix: use a type annotation to specify what ‘k0’ should be.
+      These potential instances exist:
+        instance (Eq a, Eq b) => Eq (Either a b)
+          -- Defined in ‘Data.Either’
+        instance Eq Ordering -- Defined in ‘GHC.Classes’
+        instance Eq Integer
+          -- Defined in ‘integer-gmp-1.0.2.0:GHC.Integer.Type’
+        ...plus 24 others
+        ...plus 56 instances involving out-of-scope types
+        (use -fprint-potential-instances to see them all)
+    • In the expression:
+        insert 4 "hi" (insert 5 "bye" (insert 6 "what" empty))
+      In an equation for ‘example’:
+          example = insert 4 "hi" (insert 5 "bye" (insert 6 "what" empty))
+  |
+5 | example = insert 4 "hi"
+  |           ^^^^^^^^^^^^^...
+
+Inclass.hs:5:18: error:
+    • Ambiguous type variable ‘k0’ arising from the literal ‘4’
+      prevents the constraint ‘(Num k0)’ from being solved.
+      Relevant bindings include
+        example :: HashMap k0 [Char] (bound at Inclass.hs:5:1)
+      Probable fix: use a type annotation to specify what ‘k0’ should be.
+      These potential instances exist:
+        instance Num Integer -- Defined in ‘GHC.Num’
+        instance Num Double -- Defined in ‘GHC.Float’
+        instance Num Float -- Defined in ‘GHC.Float’
+        ...plus two others
+        ...plus 18 instances involving out-of-scope types
+        (use -fprint-potential-instances to see them all)
+    • In the first argument of ‘insert’, namely ‘4’
+      In the expression:
+        insert 4 "hi" (insert 5 "bye" (insert 6 "what" empty))
+      In an equation for ‘example’:
+          example = insert 4 "hi" (insert 5 "bye" (insert 6 "what" empty))
+  |
+5 | example = insert 4 "hi"
+  |                  ^
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> example
+fromList [(4,"hi"),(5,"bye"),(6,"what")]
+*Inclass> :t toUpper
+
+<interactive>:1:1: error: Variable not in scope: toUpper
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :t toUpper
+toUpper :: Char -> Char
+*Inclass> :t map toUpper
+
+<interactive>:1:1: error:
+    Ambiguous occurrence ‘map’
+    It could refer to either ‘Prelude.map’,
+                             imported from ‘Prelude’ at Inclass.hs:1:8-14
+                             (and originally defined in ‘GHC.Base’)
+                          or ‘Data.HashMap.Strict.map’,
+                             imported from ‘Data.HashMap.Strict’ at Inclass.hs:3:1-26
+*Inclass> :t fmap toUpper
+fmap toUpper :: Functor f => f Char -> f Char
+*Inclass> :t Prelude.map toUpper
+Prelude.map toUpper :: [Char] -> [Char]
+*Inclass> strToUpper = Prelude.map toUpper
+*Inclass> strToUpper "hi"
+"HI"
+*Inclass> fmap strToUpper example
+fromList [(4,"HI"),(5,"BYE"),(6,"WHAT")]
+*Inclass> :q
+Leaving GHCi.
+antioch:~/plc/lec/feb12-functors-applicatives$ ghci
+GHCi, version 8.4.3: http://www.haskell.org/ghc/  :? for help
+Prelude> :t map
+map :: (a -> b) -> [a] -> [b]
+Prelude> :t map2
+
+<interactive>:1:1: error:
+    • Variable not in scope: map2
+    • Perhaps you meant one of these:
+        ‘map’ (imported from Prelude), ‘mapM’ (imported from Prelude)
+Prelude> :l Inclass
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> addLists [1,2,3] [10,20,30,40,50]
+[11,22,33]
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> concatLists ["hi","bye"] (repeat "way")
+["hiway","byeway"]
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> concatLists' ["hi","bye"] (repeat "way")
+["hiway","byeway"]
+*Inclass> map2Maybes (+) (Just 3) (Just 4)
+
+<interactive>:9:1: error:
+    • Variable not in scope:
+        map2Maybes
+          :: (Integer -> Integer -> Integer)
+             -> Maybe Integer -> Maybe Integer -> t
+    • Perhaps you meant ‘mapMaybe’ (imported from Data.HashMap.Strict)
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> map2Maybes (+) (Just 3) (Just 4)
+Just 7
+*Inclass> map2Maybes (+) (Just 3) Nothing
+Nothing
+*Inclass> map2Maybes (+) Nothing (Just 3)
+Nothing
+*Inclass> pure (+) <*> Just 3 <*> Just 4
+Just 7
+*Inclass> (+) <$> Just 3 <*> Just 4
+Just 7
+*Inclass> (+) <$> Nothing <*> Just 4
+Nothing
+*Inclass> pure 3 
+3
+*Inclass> :t pure 3 
+pure 3 :: (Applicative f, Num a) => f a
+*Inclass> pure 3:: Maybe Int
+Just 3.
+*Inclass> pure 3 :: [Int]
+[3]
+*Inclass> import Data.Tree
+*Inclass Data.Tree> pure 3 :: Tree Int
+Node {rootLabel = 3, subForest = []}
+*Inclass Data.Tree> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:45:7: error: Not in scope: data constructor ‘Times’
+   |
+45 | eval (Times x y) = case eval x of
+   |       ^^^^^
+Failed, no modules loaded.
+Prelude Data.Tree> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass Data.Tree> eval (Mult (Add (Num 3) (Num 4)) (Num 2))
+Just 14
+*Inclass Data.Tree> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass Data.Tree> eval (Mult (Add (Num 3) (Num 4)) (Add Bomb (Num 2)))
+Nothing
+*Inclass Data.Tree> :t (/)
+(/) :: Fractional a => a -> a -> a
+*Inclass Data.Tree> 4 / 2
+2.0
+*Inclass Data.Tree> 4 / 3
+1.3333333333333333
+*Inclass Data.Tree> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:56:35: error:
+    • No instance for (Fractional Integer) arising from a use of ‘/’
+    • In the first argument of ‘pure’, namely ‘(/)’
+      In the first argument of ‘(<*>)’, namely ‘pure (/)’
+      In the first argument of ‘(<*>)’, namely ‘pure (/) <*> eval x’
+   |
+56 |                    Just n -> pure (/) <*> eval x <*> Just n
+   |                                   ^^^
+Failed, no modules loaded.
+Prelude Data.Tree> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:42:16: error:
+    • Couldn't match type ‘Integer’ with ‘Float’
+      Expected type: Maybe Float
+        Actual type: Maybe Integer
+    • In the expression: Just x
+      In an equation for ‘eval’: eval (Num x) = Just x
+   |
+42 | eval (Num x) = Just x
+   |                ^^^^^^
+Failed, no modules loaded.
+Prelude Data.Tree> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass Data.Tree> eval (Mult (Add (Num 3) (Num 4)) (Div (Num 2) (Mult (Num 4) (Num 0))))
+Nothing
+*Inclass Data.Tree> pure (+) <*> [1,2,3] <*> [10,20,30]
+[11,21,31,12,22,32,13,23,33]
+*Inclass Data.Tree> pure (+) <*> ZipList [1,2,3] <*> ZipList [10,20,30]
+
+<interactive>:36:14: error:
+    Data constructor not in scope: ZipList :: [Integer] -> f b
+
+<interactive>:36:34: error:
+    Data constructor not in scope: ZipList :: [Integer] -> f b
+*Inclass Data.Tree> import Control.Applicative
+*Inclass Data.Tree Control.Applicative> pure (+) <*> ZipList [1,2,3] <*> ZipList [10,20,30]
+ZipList {getZipList = [11,22,33]}
+*Inclass Data.Tree Control.Applicative> :t ZipList
+ZipList :: [a] -> ZipList a
+*Inclass Data.Tree Control.Applicative> 

@@ -1,0 +1,217 @@
+antioch:~/plc/lec/feb14-monads-io$ ghci 
+GHCi, version 8.4.3: http://www.haskell.org/ghc/  :? for help
+Prelude> :l Inclass
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:7:18: error:
+    • Expected kind ‘* -> *’, but ‘EvalResult’ has kind ‘*’
+    • In the first argument of ‘Functor’, namely ‘EvalResult’
+      In the instance declaration for ‘Functor EvalResult’
+  |
+7 | instance Functor EvalResult where
+  |                  ^^^^^^^^^^
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :t id
+id :: a -> a
+*Inclass> fs = [ not , id , not , not ]
+*Inclass> xs = [ True , True , False ]
+*Inclass> [ f x | f <- fs , x <- xs ]
+[False,False,True,True,True,False,False,False,True,False,False,True]
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:13:10: warning: [-Wmissing-methods]
+    • No explicit implementation for
+        either ‘<*>’ or ‘GHC.Base.liftA2’
+    • In the instance declaration for ‘Applicative EvalResult’
+   |
+13 | instance Applicative EvalResult where
+   |          ^^^^^^^^^^^^^^^^^^^^^^
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:15:3: error:
+    • Couldn't match expected type ‘EvalResult (a -> b)’
+                  with actual type ‘([a1], f0 (a0 -> b0))’
+    • In the pattern: (ds, mf)
+      In an equation for ‘<*>’:
+          (ds, mf) <*> (ds', mx) = (ds ++ ds', mf <*> mx)
+      In the instance declaration for ‘Applicative EvalResult’
+    • Relevant bindings include
+        (<*>) :: EvalResult (a -> b) -> EvalResult a -> EvalResult b
+          (bound at Inclass.hs:15:11)
+   |
+15 |   (ds,mf) <*> (ds',mx) = (ds ++ ds', mf <*> mx)
+   |   ^^^^^^^
+
+Inclass.hs:15:15: error:
+    • Couldn't match expected type ‘EvalResult a’
+                  with actual type ‘([a1], f0 a0)’
+    • In the pattern: (ds', mx)
+      In an equation for ‘<*>’:
+          (ds, mf) <*> (ds', mx) = (ds ++ ds', mf <*> mx)
+      In the instance declaration for ‘Applicative EvalResult’
+    • Relevant bindings include
+        mf :: f0 (a0 -> b0) (bound at Inclass.hs:15:7)
+        ds :: [a1] (bound at Inclass.hs:15:4)
+        (<*>) :: EvalResult (a -> b) -> EvalResult a -> EvalResult b
+          (bound at Inclass.hs:15:11)
+   |
+15 |   (ds,mf) <*> (ds',mx) = (ds ++ ds', mf <*> mx)
+   |               ^^^^^^^^
+
+Inclass.hs:15:26: error:
+    • Couldn't match expected type ‘EvalResult b’
+                  with actual type ‘([a1], f0 b0)’
+    • In the expression: (ds ++ ds', mf <*> mx)
+      In an equation for ‘<*>’:
+          (ds, mf) <*> (ds', mx) = (ds ++ ds', mf <*> mx)
+      In the instance declaration for ‘Applicative EvalResult’
+    • Relevant bindings include
+        mx :: f0 a0 (bound at Inclass.hs:15:20)
+        ds' :: [a1] (bound at Inclass.hs:15:16)
+        mf :: f0 (a0 -> b0) (bound at Inclass.hs:15:7)
+        ds :: [a1] (bound at Inclass.hs:15:4)
+        (<*>) :: EvalResult (a -> b) -> EvalResult a -> EvalResult b
+          (bound at Inclass.hs:15:11)
+   |
+15 |   (ds,mf) <*> (ds',mx) = (ds ++ ds', mf <*> mx)
+   |                          ^^^^^^^^^^^^^^^^^^^^^^
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:35:1: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> eval test
+
+<interactive>:18:1: error:
+    • No instance for (Show (EvalResult Float))
+        arising from a use of ‘print’
+    • In a stmt of an interactive GHCi command: print it
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:17:15: error:
+    • Expecting one more argument to ‘EvalResult’
+      Expected a type, but ‘EvalResult’ has kind ‘* -> *’
+    • In the first argument of ‘Show’, namely ‘EvalResult’
+      In the instance declaration for ‘Show EvalResult’
+   |
+17 | instance Show EvalResult where
+   |               ^^^^^^^^^^
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+
+Inclass.hs:18:8: error:
+    • Couldn't match expected type ‘EvalResult a’
+                  with actual type ‘(a1, Maybe a0)’
+    • In the pattern: (ds, Nothing)
+      In an equation for ‘show’:
+          show (ds, Nothing)
+            = "divisors: " ++ show ds ++ "\nDivide by zero error."
+      In the instance declaration for ‘Show (EvalResult a)’
+    • Relevant bindings include
+        show :: EvalResult a -> String (bound at Inclass.hs:18:3)
+   |
+18 |   show (ds,Nothing) = "divisors: " ++ show ds ++ "\nDivide by zero error."
+   |        ^^^^^^^^^^^^
+
+Inclass.hs:19:8: error:
+    • Couldn't match expected type ‘EvalResult a’
+                  with actual type ‘(a2, Maybe a3)’
+    • In the pattern: (ds, Just n)
+      In an equation for ‘show’:
+          show (ds, Just n)
+            = "divisors: " ++ show ds ++ "\nResult is " ++ show n
+      In the instance declaration for ‘Show (EvalResult a)’
+    • Relevant bindings include
+        show :: EvalResult a -> String (bound at Inclass.hs:18:3)
+   |
+19 |   show (ds,Just n) = "divisors: " ++ show ds ++ "\nResult is " ++ show n
+   |        ^^^^^^^^^^^
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> eval test
+divisors: [0.0,3.0]
+Divide by zero error.
+*Inclass> 3 / 0
+Infinity
+*Inclass> 3 / 0 :: Float
+Infinity
+*Inclass> (3 / 0) :: Float
+Infinity
+*Inclass> :t (>>=)
+(>>=) :: Monad m => m a -> (a -> m b) -> m b
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> eval test
+divisors: [3.0,0.0]
+Divide by zero error.
+*Inclass> :r
+[1 of 1] Compiling Inclass          ( Inclass.hs, interpreted )
+Ok, one module loaded.
+*Inclass> eval test
+divisors: [3.0,0.0]
+Divide by zero error.
+*Inclass> quit
+
+<interactive>:32:1: error:
+    • Variable not in scope: quit
+    • Perhaps you meant ‘quot’ (imported from Prelude)
+*Inclass> :quit
+Leaving GHCi.
+antioch:~/plc/lec/feb14-monads-io$ cd
+antioch:~$ cd plf-book/
+antioch:~/plf-book$ ls
+advancedtypes.tex  book.toc	    foz.tex		  nondet.tex				       README.txt
+astnpe.gv	   chapterx.sty     fp.aux		  not-included/				       reviews/
+astsum.gv	   copyediting/     fp.tex		  old-cse240-notes/			       simple-types.aux
+axsemwhile.aux	   densemnew1.tex   introduction.aux	  opsemwhile.aux			       simple-types.tex
+axsemwhile.tex	   densemwhile.aux  introduction.tex	  opsemwhile.tex			       snstlc.tex
+book.aux	   densemwhile.tex  lam-calc-common.tex   ordinals.tex				       snsyst.tex
+book.bib	   errata.aux	    Makefile		  plf-book.pdf				       stlc.pdf
+book.ind	   errata.log	    math-summary.aux	  preamble.tex				       systemf.aux
+book.log	   errata.out	    math-summary.tex	  programming-in-lambda.aux		       systemf.tex
+book.out	   errata.pdf	    more-untyped-lam.aux  programming-in-lambda.tex		       untyped-lambda-calculus.aux
+book.pdf	   errata.tex	    more-untyped-lam.tex  programming_language_foundations_submitted/  untyped-lambda-calculus.tex
+book.tex	   foz.aux	    nondet.aux		  proposal/
+antioch:~/plf-book$ evince book.pdf 
+antioch:~/plf-book$ cd
+antioch:~$ 

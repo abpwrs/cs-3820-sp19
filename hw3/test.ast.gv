@@ -1,0 +1,26 @@
+graph G {
+node [shape=plaintext];
+n [ label = "f"];
+n -- n1;
+n1 [ label = "g"];
+n1 -- n1a1;
+n1a1 [ label = "a"];
+n1 -- n1a2;
+n1a2 [ label = "b"];
+n1 -- n1a3;
+n1a3 [ label = "c"];
+n -- n2;
+n2 [ label = "d"];
+n -- n3;
+n3 [ label = "x3"];
+n -- n4;
+n4 [ label = "h"];
+n4 -- n4a1;
+n4a1 [ label = "x4"];
+n4 -- n4a2;
+n4a2 [ label = "x5"];
+n4 -- n4a3;
+n4a3 [ label = "k"];
+n4a3 -- n4a3a1;
+n4a3a1 [ label = "x6"];
+}

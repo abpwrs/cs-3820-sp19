@@ -1,0 +1,38 @@
+antioch:~/plc/lec/feb28-parsing-in-haskell$ ghci
+GHCi, version 8.4.3: http://www.haskell.org/ghc/  :? for help
+Prelude> :t fmap
+fmap :: Functor f => (a -> b) -> f a -> f b
+Prelude> :t (fmap not) :: [Bool] -> [Bool]
+(fmap not) :: [Bool] -> [Bool] :: [Bool] -> [Bool]
+Prelude> :t map
+map :: (a -> b) -> [a] -> [b]
+Prelude> :t (map not) :: [Bool] -> [Bool]
+(map not) :: [Bool] -> [Bool] :: [Bool] -> [Bool]
+Prelude> :t (map not) :: Functor f => f Bool -> f Bool
+
+<interactive>:1:2: error:
+    • Couldn't match type ‘f1’ with ‘[]’
+      ‘f1’ is a rigid type variable bound by
+        an expression type signature:
+          forall (f1 :: * -> *). Functor f1 => f1 Bool -> f1 Bool
+        at <interactive>:1:14-42
+      Expected type: f1 Bool -> f1 Bool
+        Actual type: [Bool] -> [Bool]
+    • In the expression: (map not) :: Functor f => f Bool -> f Bool
+Prelude> :q
+Leaving GHCi.
+antioch:~/plc/lec/feb28-parsing-in-haskell$ d
+antioch:~/plc/lec/feb28-parsing-in-haskell$ 
+antioch:~/plc/lec/feb28-parsing-in-haskell$ d
+d: command not found
+antioch:~/plc/lec/feb28-parsing-in-haskell$ cabal build
+Preprocessing executable 'Main' for feb22-0.1.0.0..
+Building executable 'Main' for feb22-0.1.0.0..
+antioch:~/plc/lec/feb28-parsing-in-haskell$ ls
+dist/  Expr.hs	feb28.cabal  Grammar.y	inclass.ora  JavaLexer.g4  JavaParser.g4  Main.hs  Tokens.x
+antioch:~/plc/lec/feb28-parsing-in-haskell$ 
+antioch:~/plc/lec/feb28-parsing-in-haskell$ 
+antioch:~/plc/lec/feb28-parsing-in-haskell$ 
+antioch:~/plc/lec/feb28-parsing-in-haskell$ ./dist/build/Main/Main test.expr 
+(let x = 22 in (x * x))
+antioch:~/plc/lec/feb28-parsing-in-haskell$ 

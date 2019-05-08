@@ -1,0 +1,89 @@
+antioch:~/plc/lec/jan-17-starting-haskell$ ghci
+GHCi, version 8.4.3: http://www.haskell.org/ghc/  :? for help
+Prelude> 2 + 3
+5
+Prelude> "hi " ++ "there"
+"hi there"
+Prelude> [ 1 , 2 , 3 , 4 ] ++ [ 5 , 6 , 7 ]
+[1,2,3,4,5,6,7]
+Prelude> :t ++
+
+<interactive>:1:1: error: parse error on input ‘++’
+Prelude> :t (++)
+(++) :: [a] -> [a] -> [a]
+Prelude> :t ['a','b','c']
+['a','b','c'] :: [Char]
+Prelude> :t True
+True :: Bool
+Prelude> :t [True,False,False]
+[True,False,False] :: [Bool]
+Prelude> :t not
+not :: Bool -> Bool
+Prelude> :t id
+id :: a -> a
+Prelude> :t [not,id,not,id]
+[not,id,not,id] :: [Bool -> Bool]
+Prelude> :t [not,(++),not]
+
+<interactive>:1:6: error:
+    • Couldn't match type ‘[a0]’ with ‘Bool’
+      Expected type: Bool -> Bool
+        Actual type: [a0] -> [a0] -> [a0]
+    • Probable cause: ‘(++)’ is applied to too few arguments
+      In the expression: (++)
+      In the expression: [not, (++), not]
+Prelude> :t [not,id,not,id]
+[not,id,not,id] :: [Bool -> Bool]
+Prelude> :t []
+[] :: [a]
+Prelude> [] ++ []
+[]
+Prelude> :t (:)
+(:) :: a -> [a] -> [a]
+Prelude> 3 : [ 4, 5, 6, 7]
+[3,4,5,6,7]
+Prelude> let f = (:) 'a'
+Prelude> :t f
+f :: [Char] -> [Char]
+Prelude> let f = (:) 'z'
+Prelude> :t f
+f :: [Char] -> [Char]
+Prelude> f "oo"
+"zoo"
+Prelude> f "ebrafish"
+"zebrafish"
+Prelude> :t ('z' :)
+('z' :) :: [Char] -> [Char]
+Prelude> 'z' : ['o
+
+<interactive>:27:10: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+Prelude> 'z' : ['o','o']
+"zoo"
+Prelude> let g = (3 + )
+Prelude> g 4
+7
+Prelude> g 6
+9
+Prelude> - 3
+-3
+Prelude> let q = not . not
+Prelude> q True
+True
+Prelude> :t (.)
+(.) :: (b -> c) -> (a -> b) -> a -> c
+Prelude> [1,2,3]
+[1,2,3]
+Prelude> :t map
+map :: (a -> b) -> [a] -> [b]
+Prelude> map (10 * ) [1,2,3]
+[10,20,30]
+Prelude> :t [10,20,30]
+[10,20,30] :: Num a => [a]
+Prelude> :t 10
+10 :: Num p => p
+Prelude> :t (10 :: Int)
+(10 :: Int) :: Int
+Prelude> :t (10 :: Rational)
+(10 :: Rational) :: Rational
+Prelude> 

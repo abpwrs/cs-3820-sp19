@@ -1,0 +1,12 @@
+digraph G {
+node [shape=plaintext];
+n [ label = "*"];
+n -> nL;
+n -> nR;
+nL [ label = "+"];
+nL -> nLL;
+nL -> nLR;
+nLL [ label = "2"];
+nLR [ label = "3"];
+nR [ label = "4"];
+}
